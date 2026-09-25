@@ -54,7 +54,7 @@ The course follows six teaching principles:
 
 Questions or corrections are welcome through the repository's
 [issue tracker](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/issues) —
-see [How to Contribute](../CONTRIBUTING.md).
+see [How to Contribute](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/CONTRIBUTING.md).
 
 ---
 

@@ -86,8 +86,7 @@ self-check quiz.
 **Unit 03 · Input, Output & Simple Programs** — `std::cin` for all basic
 types; the input buffer and its pitfalls; `std::getline`; mixing `>>` and
 `getline`; formatted output with `<iomanip>`. Lab 03: *Interactive Grade
-Reporter*. **Deep-dive:** the [C++ Input/Output
-module](cpp-io/index.md) covers all of Unit 03's machinery — cout and
+Reporter*. **Deep-dive:** the [C++ Input/Output module](cpp-io/index.md) covers all of Unit 03's machinery — cout and
 formatting, cin and the buffer, getline and the mixing trap, validation
 basics — with traces, predictions, 24 exercises, 10 debugging hunts, 10
 challenges, and 5 lab scenarios.

@@ -207,5 +207,5 @@ the [Getting Started](getting-started/index.md) pack and
 
 ---
 
-*Misspelled or unclear? [Report it](../CONTRIBUTING.md) — the glossary should
+*Misspelled or unclear? [Report it](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/CONTRIBUTING.md) — the glossary should
 never be the hardest part of the course.*

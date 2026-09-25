@@ -114,7 +114,7 @@ Yes — that's why solutions and rubrics are public. See
 [licence](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/LICENSE).
 
 **How do I report a typo or broken link?**
-[CONTRIBUTING.md](../CONTRIBUTING.md) has a 60-second recipe.
+[CONTRIBUTING.md](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/CONTRIBUTING.md) has a 60-second recipe.
 
 ---
 

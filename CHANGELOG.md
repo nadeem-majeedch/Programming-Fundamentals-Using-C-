@@ -407,6 +407,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **GitHub Pages build fixed (“Dependency Error: jekyll-coffeescript is
+  missing”)** — the deploy workflow's Jekyll build failed because
+  `docs/_config.yml` whitelisted three plugins (`jekyll-coffeescript`,
+  `jekyll-gist`, `jekyll-github-metadata`) that were never declared in the
+  `Gemfile` and that no course page uses; Jekyll requires every whitelisted
+  plugin at startup. The whitelist is now exactly `jekyll-relative-links`,
+  with the whitelist/Gemfile lockstep rule documented in both files; the
+  Gemfile pins `jekyll ~> 3.10` (the version GitHub Pages currently ships);
+  `Gemfile.lock` is committed so local and CI builds resolve identical gem
+  versions. The rebuilt site also surfaced and repaired 17 link defects the
+  link checker could not see: 7 Unit 01 companion-module banners used raw
+  HTML anchors the link rewriter mishandles (5 with an escaping `../../../`
+  path) — now proper markdown in `markdown="1"` blocks; 6 links to
+  repository-root files (`CONTRIBUTING.md`, `README.md`) would have 404'd
+  on the published site — now absolute GitHub links; and 4 link texts
+  wrapped across lines slipped past link rewriting and lost the site
+  baseurl. `tools/check-links.sh` now also scans raw-HTML anchor hrefs
+  (including root-absolute detection) and `tools/check-anchors.sh` skips
+  tooling directories. Local Jekyll build verified end-to-end: 264 pages,
+  correct baseurl on every link, student homepage intact
+  (`reports/github-pages-build-fix.md`).
 - **README “Start here” chain now reaches Lesson 1 third, not last** — the
   chain previously listed all 22 modules before “Unit 01 · Lesson 1” and
   ended on the legacy duplicate; it now goes Getting Started →

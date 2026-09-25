@@ -3,7 +3,7 @@ title: "Quiz 01 — Introduction to Programming & C++"
 description: "10 questions on Unit 01. Attempt all before opening the answer key."
 ---
 
-<div class="note"><strong>Companion module:</strong> the <a href="../../../cpp-foundations/index.md">C++ Foundations module</a> is the complete, enriched version of this unit's material — study these pages together for extra depth, practice sets, and the variation lab.</div>
+<div class="note" markdown="1"><strong>Companion module:</strong> the [C++ Foundations module](../../cpp-foundations/index.md) is the complete, enriched version of this unit's material — study these pages together for extra depth, practice sets, and the variation lab.</div>
 
 
 # Quiz 01 — Introduction to Programming & C++

@@ -113,7 +113,7 @@ you asked for the wrong thing. Classic first case: integer division
 4. If the message mentions a name, check spelling, `#include`, and `std::`.
 5. Still stuck after a few minutes? Find it in the
    [FAQ](../faq.md#troubleshooting-quick-answers) or report it via
-   [CONTRIBUTING](../../CONTRIBUTING.md).
+   [CONTRIBUTING](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/CONTRIBUTING.md).
 
 ---
 

@@ -716,9 +716,9 @@ fast in both:
 - **Navigation patterns:** the [Syllabus](../syllabus.md) links every unit;
   every unit index links its lessons and components; every page ends with a
   breadcrumb back up. The README of the repository is the
-  [front door](../../README.md).
+  [front door](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/README.md).
 - **Found a typo or broken link?** The site is maintained through the
-  repository — [CONTRIBUTING.md](../../CONTRIBUTING.md) shows the 60-second
+  repository — [CONTRIBUTING.md](https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-/blob/main/CONTRIBUTING.md) shows the 60-second
   way to report it.
 
 <a name="22-optional-gitgithub-introduction"></a>

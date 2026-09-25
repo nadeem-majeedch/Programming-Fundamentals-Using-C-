@@ -11,8 +11,7 @@ This course is built for self-study: every unit gives you the material, the
 practice, and the answer keys you need to verify your own progress. This page
 explains the method that makes it work. (For the underlying *learning
 skills* — reading code, predicting, debugging, when to peek at hints, the
-notebook and portfolio — see the companion guide, [How to Learn
-Programming](learning-guide.md).)
+notebook and portfolio — see the companion guide, [How to Learn Programming](learning-guide.md).)
 
 ---
 

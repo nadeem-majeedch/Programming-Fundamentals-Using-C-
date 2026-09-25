@@ -61,8 +61,9 @@ Properties of this setup:
 | Path | Role |
 | --- | --- |
 | `.github/workflows/deploy.yml` | The deployment workflow (build + deploy jobs) |
-| `Gemfile` | Build gems: `jekyll` 3.9, `kramdown-parser-gfm` (needed for `input: GFM`), `jekyll-relative-links` |
-| `docs/_config.yml` | Site configuration, plugin whitelist, published-site excludes |
+| `Gemfile` | Build gems: `jekyll` 3.10 (the version GitHub Pages ships), `kramdown-parser-gfm` (needed for `input: GFM`), `jekyll-relative-links` |
+| `Gemfile.lock` | Pinned gem versions — guarantees local and CI builds are identical |
+| `docs/_config.yml` | Site configuration, plugin whitelist (kept in lockstep with the Gemfile), published-site excludes |
 | `docs/_layouts`, `docs/_includes`, `docs/assets/css` | The site's layout, navigation and stylesheet |
 | `docs/_data/course.yml` | Module order used by the prev/next pager |
 
@@ -112,9 +113,14 @@ bundle exec jekyll serve --source docs --baseurl ""
 # open http://localhost:4000
 ```
 
-This uses the same Gemfile and configuration as CI, so a page that renders
-locally renders identically after deploy (differences in plugin sets are the
-classic exception — the whitelist in `docs/_config.yml` keeps them aligned).
+The build is fully reproducible: the exact gem versions live in the
+committed `Gemfile.lock` (`ruby/setup-ruby` runs `bundle install`, which
+uses the lock verbatim, then verifies it still matches the `Gemfile`).
+Regenerate it with `bundle install` whenever the `Gemfile` changes.
+
+The Jekyll build was verified end-to-end on 2026-09-25 after fixing the
+`jekyll-coffeescript` dependency failure; the full diagnosis and evidence
+live in `reports/github-pages-build-fix.md`.
 
 ## Troubleshooting
 
@@ -130,8 +136,22 @@ classic exception — the whitelist in `docs/_config.yml` keeps them aligned).
 ### The build fails
 
 - Read the **build job** log of the failing run; Jekyll errors name the file.
+- `Dependency Error: <plugin> is missing` means `docs/_config.yml`
+  whitelists a plugin the `Gemfile` does not declare. Jekyll `require`s
+  every whitelisted plugin at startup. Either add the gem to the `Gemfile`
+  or remove the whitelist entry — keep the two in lockstep (this exact
+  failure happened with `jekyll-coffeescript`, `jekyll-gist`, and
+  `jekyll-github-metadata`, none of which the site uses).
 - `Unknown tag 'page'`-style or `input: GFM` errors mean the Gemfile plugins
   did not install — `kramdown-parser-gfm` must be present.
+- A link that works in source but 404s only after deploy is usually missing
+  the site baseurl. Rebuild with the real baseurl and check the generated
+  HTML: every internal `href` must start with
+  `/Programming-Fundamentals-Using-C-/`. Two known ways links lose the
+  baseurl: link text wrapped across a newline inside `[...]`, and raw
+  `<a href="….md">` anchors that the link rewriter mishandles — keep link
+  text on one line and use markdown links (or `markdown="1"` on wrapping
+  HTML) instead.
 - Front-matter YAML errors are surfaced by `--strict_front_matter`; fix the
   named file (our `tools/check-anchors.sh` and link checker catch most
   content mistakes before push).

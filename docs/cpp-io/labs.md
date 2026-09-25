@@ -461,8 +461,7 @@ TOTAL ..........6198.00
 ```
 
 **Constraints.** units 0–9999; meter rent 0–1000; constants spelled
-`constexpr double` (the [Foundations constants
-lesson](../cpp-foundations/lesson-2-data.md#29-constants) applies);
+`constexpr double` (the [Foundations constants lesson](../cpp-foundations/lesson-2-data.md#29-constants) applies);
 totals must add up *exactly* to the paisa in all test cases; name is
 non-empty.
 

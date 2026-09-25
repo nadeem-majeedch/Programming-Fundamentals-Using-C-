@@ -8,14 +8,21 @@ markdown: kramdown
 kramdown:
   input: GFM
 
-# Plugins used by the build (see the root Gemfile). Only jekyll-relative-links
-# is a non-default plugin; the other three are Jekyll's built-in defaults,
-# listed explicitly so the build works identically locally, in CI, and on
-# GitHub Pages, which requires every plugin to be whitelisted here.
+# Plugins used by the build (see the root Gemfile).
+#
+# Keep this whitelist in lockstep with the Gemfile: Jekyll `require`s every
+# whitelisted plugin at startup, so a whitelist entry without a matching
+# `gem` line breaks the build with "Dependency Error: <plugin> is missing".
+# (jekyll-coffeescript, jekyll-gist and jekyll-github-metadata were once
+# listed here but no course page uses them — they are NOT whitelisted any
+# more, and must not be re-added without also adding their gem to the
+# Gemfile.)
+#
+# GitHub Pages also ships its own default plugins (jekyll-sitemap,
+# jekyll-feed, jekyll-seo-tag, …). Those are intentionally not whitelisted:
+# the site has a custom layout stack and needs none of them, and the
+# whitelist keeps local, CI and Pages builds identical.
 plugins:
-  - jekyll-coffeescript
-  - jekyll-gist
-  - jekyll-github-metadata
   - jekyll-relative-links
 
 # Every course page renders inside the same layout (header, breadcrumbs,

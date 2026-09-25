@@ -13,6 +13,13 @@
 # removed. C++ listings are full of `[](int a, int b)` lambda syntax that
 # a raw ](...) scan misreads as a link — code is not prose, and course
 # listings must stay copy-paste clean.
+#
+# Raw-HTML anchors are scanned too: course prose uses the occasional
+# <a href="..."> inside banner <div>s, which the ](...) scanner never sees.
+# That blind spot is how an escaping banner link (../../../ that climbed out
+# of docs/) survived earlier passes. The HTML scan reports hrefs that are
+# root-absolute ("/x" — never valid on a project Pages site) or resolve to
+# a missing file; URL-form and #fragment hrefs are skipped here.
 
 set -u
 
@@ -41,10 +48,34 @@ for md in $md_files; do
                 print substr(rest, RSTART + 2, RLENGTH - 3)
                 rest = substr(rest, RSTART + RLENGTH)
             }
+            while (match(rest, /<a [^>]*href="[^"]*"[^>]*>/)) {
+                tag = substr(rest, RSTART, RLENGTH)
+                rest = substr(rest, RSTART + RLENGTH)
+                if (match(tag, /href="[^"]*"/))
+                    print substr(tag, RSTART + 6, RLENGTH - 7)
+            }
         }
     ' "$md" | grep -vE '^(https?:|mailto:|#)' || true)
 
     for target in $targets; do
+        # URL-form targets (scheme://) and bare fragments are out of scope here.
+        # (http/https/mailto lines are already dropped by the grep above; this
+        # catches any other scheme, e.g. ftp:// or protocol-relative //host/.)
+        case $target in
+            *"://"* | mailto:*) continue ;;
+            "#"*) continue ;;
+        esac
+
+        # Raw-HTML anchors must not be root-absolute: "/x" resolves only on a
+        # user site or custom domain, never under /<repo>/ on project Pages.
+        case $target in
+            /*)
+                printf 'ROOT-ABSOLUTE HTML LINK: %s -> %s\n' "$md" "$target"
+                broken=$((broken + 1))
+                continue
+                ;;
+        esac
+
         # Strip fragment/query for filesystem lookup.
         path="${target%%#*}"
         path="${path%%\?*}"

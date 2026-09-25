@@ -39,7 +39,15 @@ jy() { # kramdown basic_generate_id
 
 declare -A ANCHOR BOTH GHONLY
 files=()
-while IFS= read -r f; do files+=("$f"); done < <(find . -path ./.git -prune -o -name '*.md' -print 2>/dev/null | sed 's|^\./||')
+while IFS= read -r f; do
+    # Skip tooling/dependency trees (gem docs, vendored sources, caches):
+    # they carry their own markdown with unrelated anchors.
+    case $f in
+        .freebuff/* | */.freebuff/* | vendor/* | */vendor/* \
+            | node_modules/* | */node_modules/* | .bundle/* | */.bundle/*) continue ;;
+    esac
+    files+=("$f")
+done < <(find . -path ./.git -prune -o -name '*.md' -print 2>/dev/null | sed 's|^\./||')
 
 # ---- pass A: collect explicit anchors + heading slugs (keys relative to root) ----
 for f in "${files[@]}"; do

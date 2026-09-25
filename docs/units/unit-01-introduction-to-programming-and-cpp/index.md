@@ -3,7 +3,7 @@ title: "Unit 01 — Introduction to Programming & C++"
 description: "Unit index: what a program is, your first C++ program, and how the pieces fit."
 ---
 
-<div class="note"><strong>Companion module:</strong> the <a href="../../../cpp-foundations/index.md">C++ Foundations module</a> is the complete, enriched version of this unit's material — study these pages together for extra depth, practice sets, and the variation lab.</div>
+<div class="note" markdown="1"><strong>Companion module:</strong> the [C++ Foundations module](../../cpp-foundations/index.md) is the complete, enriched version of this unit's material — study these pages together for extra depth, practice sets, and the variation lab.</div>
 
 
 # Unit 01 — Introduction to Programming & C++
