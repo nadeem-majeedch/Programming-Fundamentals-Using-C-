@@ -1,0 +1,81 @@
+# Deploys the student course website to GitHub Pages.
+#
+# In one breath: on every push to main that touches the site (or on a manual
+# run from the Actions tab), the workflow checks out the repository, builds
+# the Jekyll site whose source is docs/, verifies the homepage actually
+# built, uploads the built site as the Pages artifact, and deploys it with
+# the official Pages actions. The site is rebuilt from source every time —
+# nothing is cached between deploys, so a deploy can always be re-run safely.
+#
+# One-time setup (repository owner): Settings → Pages → Source:
+# "GitHub Actions". Until that is set, the deploy job fails with a clear
+# message. See docs/technical/github-pages.md for details and troubleshooting.
+
+name: Deploy course website to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'Gemfile'
+      - 'Gemfile.lock'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; let a running deployment finish rather than
+# cancelling it halfway (the next run will simply deploy again).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby and install the build gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true   # runs `bundle install` from the root Gemfile
+
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build the site with Jekyll
+        run: >-
+          bundle exec jekyll build
+          --source docs
+          --destination _site
+          --strict_front_matter
+          --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify the homepage exists in the built site
+        run: test -f _site/index.html
+
+      - name: Upload the built site as the Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this course in your teaching, please cite it as below."
+title: "Programming Fundamentals Using C++"
+authors:
+  - family-names: Majeed
+    given-names: Muhammad Nadeem
+    affiliation: "Department of Data Science, Punjab University College of Information Technology (PUCIT), University of the Punjab, Lahore"
+version: 0.1.0
+date-released: "2026-09-22"
+license: MIT
+abstract: "A complete, free, self-study course in programming fundamentals using C++: 16 units, 32 sessions, with examples, exercises, labs, quizzes, challenges, revision sheets, and three projects."
+keywords:
+  - C++
+  - programming
+  - fundamentals
+  - self-study
+  - computer science
+  - education

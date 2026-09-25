@@ -1,0 +1,53 @@
+# The course's recommended reading order at module level.
+# Prev/next navigation walks this list top to bottom; every entry
+# has an index.md with a title. Subpage navigation inherits the
+# module's position (module-level prev/next by design).
+order:
+  - path: getting-started
+    title: "Getting Started"
+  - path: problem-solving
+    title: "Programming and Problem-Solving Fundamentals"
+  - path: cpp-foundations
+    title: "C++ Foundations"
+  - path: cpp-io
+    title: "C++ Input and Output"
+  - path: decisions
+    title: "Unit 04 Deep Dive — Decision Making"
+  - path: repetition
+    title: "Unit 05–06 — Iteration (Loops)"
+  - path: functions
+    title: "Unit 07–08 — Functions"
+  - path: arrays
+    title: "Unit 09 — Arrays & Vectors"
+  - path: algorithms
+    title: "Algorithms — Recursion, Searching & Sorting"
+  - path: strings
+    title: "Unit 11 — Strings & Text Processing"
+  - path: files
+    title: "Unit 12 — File Handling"
+  - path: pointers
+    title: "Unit 13 — Pointers & Dynamic Memory"
+  - path: records
+    title: "Unit 14 — Records & Enums (the Bridge to OOP)"
+  - path: oop
+    title: "Object-Oriented Programming — The Bridge from Procedures to Objects"
+  - path: inheritance
+    title: "Inheritance & Polymorphism — Building on Classes"
+  - path: generics
+    title: "Operator Overloading & Templates — Writing Code That Works for Many Types"
+  - path: stl
+    title: "The Standard Template Library — Containers, Iterators, Algorithms"
+  - path: robustness
+    title: "Robustness Module — Errors, Exceptions, and Programs That Refuse to Lie"
+  - path: modern-cpp
+    title: "Modern C++ Module — What to Know, What to Adopt"
+  - path: modular
+    title: "Modular Programming — From One File to Organized Programs"
+  - path: labs
+    title: "Programming Labs — 42 Scenarios from Beginner to Integrated"
+  - path: projects
+    title: "Projects — 10 Builds from Beginner to Integrated"
+  - path: practice
+    title: "Practice Bank — 200+ Problems, Categorized"
+  - path: self-assessment
+    title: "Self-Assessment Hub — Quizzes, Revision Tests, Cumulative Tests, Practice Finals"

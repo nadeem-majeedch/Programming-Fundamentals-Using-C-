@@ -1,0 +1,45 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
+.directory
+.freebuff/
+# C++ build artefacts
+*.exe
+*.out
+*.o
+*.obj
+*.gch
+*.pch
+*.ilk
+*.pdb
+*.exp
+*.lib
+*.dll
+build/
+bin/
+obj/
+cmake-build-*/
+
+# Editor / IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.sublime-*
+.vs/
+.freebuff/
+# OS
+desktop.ini
+~$*
+
+# Jekyll / website build artefacts (CI rebuilds the site from source)
+_site/
+docs/.jekyll-cache/
+docs/.jekyll-metadata/
+.bundle/
+vendor/
+Gemfile.lock

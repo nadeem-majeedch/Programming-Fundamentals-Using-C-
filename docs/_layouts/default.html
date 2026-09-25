@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  {% if page.description %}<meta name="description" content="{{ page.description | escape }}">{% endif %}
+  <title>{% if page.title %}{{ page.title | escape }} · {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  {% if page.url == '/404.html' %}{% comment %}The 404 document is served at whatever bad URL was requested, so its relative links only resolve with an explicit base.{% endcomment %}<base href="{{ '/' | relative_url }}">{% endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/course.css' | relative_url }}">
+</head>
+<body>
+  {% include site-header.html %}
+
+  <div class="page">
+    {% assign crumbs = page.url | split: '/' %}
+    {% unless crumbs == empty or page.url == '/' %}
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      {% for crumb in crumbs offset:1 %}
+        {% if forloop.last %}
+          {% unless page.is_home %}<span aria-hidden="true">›</span> {{ page.title | escape }}{% endunless %}
+        {% else %}
+          {% capture crumb_url %}/{% for c in crumbs limit: forloop.index offset:1 %}{{ c }}/{% endfor %}{% endcapture %}
+          {% assign idx_page = site.pages | where: 'url', crumb_url | first %}
+          {% if idx_page.title %}<span aria-hidden="true">›</span> <a href="{{ crumb_url | relative_url }}">{{ idx_page.title | escape }}</a>{% endif %}
+        {% endif %}
+      {% endfor %}
+    </nav>
+    {% endunless %}
+
+    <main id="main">
+      {% if page.legacy_note %}<div class="note legacy-note">{{ page.legacy_note }}</div>{% endif %}
+      {{ content }}
+    </main>
+
+    {% include site-footer.html %}
+  </div>
+</body>
+</html>

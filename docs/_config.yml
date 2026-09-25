@@ -1,0 +1,40 @@
+# Jekyll configuration for the course website (source: /docs).
+# The site uses a small custom layout (docs/_layouts) rather than a theme,
+# so course pages stay lightweight and fully under the course's control.
+title: Programming Fundamentals Using C++
+description: A complete, free, self-study course in programming with C++ — 16 units, 32 sessions, labs, projects, and quizzes.
+lang: en
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Plugins used by the build (see the root Gemfile). Only jekyll-relative-links
+# is a non-default plugin; the other three are Jekyll's built-in defaults,
+# listed explicitly so the build works identically locally, in CI, and on
+# GitHub Pages, which requires every plugin to be whitelisted here.
+plugins:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-relative-links
+
+# Every course page renders inside the same layout (header, breadcrumbs,
+# content, prev/next pager, footer). Pages that set their own `layout:`
+# in front matter (index.md, 404.md) keep it; those that don't get this one.
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+# Kept in the repository for contributors, not published on the student site.
+# They remain fully readable on GitHub.
+exclude:
+  - course-architecture.md
+  - implementation-plan.md
+  - technical
+
+# Production deploys build this folder with GitHub Actions
+# (.github/workflows/deploy.yml) and publish with the official Pages actions.
+# To preview locally:  bundle exec jekyll serve --source docs --baseurl ""

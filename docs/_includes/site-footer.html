@@ -1,0 +1,45 @@
+{% comment %}
+  Previous/next module navigation, computed from _data/course.yml.
+  The module is the first URL segment; every page in a module shares
+  the module's position (module-level prev/next by design).
+{% endcomment %}
+{% assign segs = page.url | split: '/' %}
+{% assign mod = segs[1] %}
+{% assign prev = nil %}
+{% assign next = nil %}
+{% if mod and mod != '' %}
+  {% assign order = site.data.course.order %}
+  {% for m in order %}
+    {% if m.path == mod %}
+      {% assign i = forloop.index0 %}
+      {% assign last = forloop.length | minus: 1 %}
+      {% unless i == 0 %}{% assign j = i | minus: 1 %}{% assign prev = order[j] %}{% endunless %}
+      {% unless i == last %}{% assign k = i | plus: 1 %}{% assign next = order[k] %}{% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if prev or next %}
+<nav class="pager" aria-label="Module navigation">
+  {% if prev %}
+    <a class="pager-link pager-prev" href="{{ prev.path | prepend: '/' | append: '/' | relative_url }}">
+      <span class="pager-dir">&larr; Previous module</span>
+      <span class="pager-title">{{ prev.title | escape }}</span>
+    </a>
+  {% else %}<span class="pager-link pager-empty" aria-hidden="true"></span>{% endif %}
+  {% if next %}
+    <a class="pager-link pager-next" href="{{ next.path | prepend: '/' | append: '/' | relative_url }}">
+      <span class="pager-dir">Next module &rarr;</span>
+      <span class="pager-title">{{ next.title | escape }}</span>
+    </a>
+  {% else %}<span class="pager-link pager-empty" aria-hidden="true"></span>{% endif %}
+</nav>
+{% endif %}
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Programming Fundamentals Using C++</strong> — a free, self-study course.<br>
+    Course author and instructor: Engr. Dr. Muhammad Nadeem Majeed, Department of Data Science (PUCIT), University of the Punjab, Lahore.</p>
+    <p><a href="{{ '/about.html' | relative_url }}">About the course and instructor</a> · <a href="{{ '/syllabus.html' | relative_url }}">Syllabus</a> · <a href="{{ '/roadmap/' | relative_url }}">Roadmap</a> · <a href="https://github.com/nadeem-majeedch/Programming-Fundamentals-Using-C-">Source repository</a></p>
+  </div>
+</footer>
